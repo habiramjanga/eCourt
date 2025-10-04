@@ -1,0 +1,124 @@
+{% extends "master.html" %}
+
+{% block content %}
+<h2 class="text-center">{{ case_data.court_name }}</h2>
+
+<!-- Case Details -->
+<h3>Case Details</h3>
+<table class="table table-bordered">
+    <tbody>
+        {% for key, value in case_data.case_info.items %}
+        <tr>
+            <td><strong>{{ key }}</strong></td>
+            <td>{{ value }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Case Status -->
+<h3>Case Status</h3>
+<table class="table table-bordered">
+    <tbody>
+        {% for key, value in case_data.case_status.items %}
+        <tr>
+            <td><strong>{{ key }}</strong></td>
+            <td>{{ value }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Petitioner -->
+<h3>Petitioner and Advocate</h3>
+<table class="table table-bordered">
+    <tbody>
+        {% for petitioner in case_data.petitioner_list %}
+        <tr>
+            <td>{{ petitioner }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Respondent -->
+<h3>Respondent and Advocate</h3>
+<table class="table table-bordered">
+    <tbody>
+        {% for respondent in case_data.respondent_list %}
+        <tr>
+            <td>{{ respondent }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Acts -->
+<h3>Acts</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Act</th>
+            <th>Section</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for act in case_data.acts_list %}
+        <tr>
+            <td>{{ act.act }}</td>
+            <td>{{ act.section }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Processes -->
+<h3>Processes</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Process ID</th>
+            <th>Title</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for process in case_data.processes %}
+        <tr>
+            <td>{{ process.id }}</td>
+            <td>{{ process.title }}</td>
+            <td>{{ process.date }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!-- Orders -->
+<h3>Orders / Judgments</h3>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Order Number</th>
+            <th>Order Date</th>
+            <th>Details</th>
+            <th>PDF Link</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in case_data.orders %}
+        <tr>
+            <td>{{ order.order_number }}</td>
+            <td>{{ order.order_date }}</td>
+            <td>{{ order.order_details }}</td>
+            <td>
+                {% if order.pdf_link %}
+                <a href="#" onclick="{{ order.pdf_link }}">View PDF</a>
+                {% else %}
+                N/A
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

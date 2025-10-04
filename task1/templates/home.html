@@ -1,0 +1,8 @@
+{% extends "master.html" %}
+
+{% block content %}
+    <form method="post" action="{% url 'select_state' %}">
+        {% csrf_token %}
+        <button type="submit">Initialize Session</button>
+    </form>
+{% endblock %}

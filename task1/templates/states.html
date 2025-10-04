@@ -1,0 +1,14 @@
+{% extends "master.html" %}
+
+{% block content %}
+    <h2>Select a State</h2>
+    <form method="post" action="{% url 'select_dist' %}">
+        {% csrf_token %}
+        <select name="state">
+            {% for state in states %}
+                <option value="{{ state }}">{{ state }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+{% endblock %}
